@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../lib/jquery-3.1.1.min.js'></script>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+	</ul>
+
+	<p>p标签<span>span标签</span></p>
+
+	<button id="button1" type="button">添加孩子节点</button>
+	<button id="button2" type="button">添加兄弟节点</button>
+	<button id="button3" type="button">clone节点</button>
+	<button id="button4" type="button">replace节点</button>
+
+	<button id="button5" type="button">wrap</button>
+	<button id="button6" type="button">wrapInner</button>
+	<button id="button7" type="button">wrapAll</button>
+	<button id="button8" type="button">unwrap</button>
+
+	<button id="button9" type="button">remove删除</button>
+	<button id="button10" type="button">遍历</button>
+
+	<script>
+		$('p').click(function(){ alert('p被点击了')});
+
+		$('#button1').click(function(){
+			//--------------------append------------------------
+			//第一种方式ok
+			// var str = '<li>6</li>';
+			// $('ul').append(str);
+
+			//DOM节点
+			// var dom = document.createElement('li');
+			// dom.appendChild(document.createTextNode('6'));
+			// $('ul').append(dom);
+
+			//jQuery
+			// var jQueryEle = $('<li data-test="xyz">6</li>');
+			// $('ul').append(jQueryEle);
+
+			// A.append(函数)，把函数的返回值追加到A的最后面
+			$('ul').append(function(index,html){ return '<li>6</li>' });
+
+			//---------------------appendTo-----------------------
+			$('<li>6</li>').appendTo($('ul'));
+
+			//--------------------prepend-------------------------
+			$('ul').prepend('<li>0</li>');//等价以下写法
+			//--------------------prependTo-----------------------
+			// $('<li>0</li>').prependTo($('ul'));
+
+			// A.prepend(函数)，把函数的返回值追加到A的最前面
+		});
+
+		$('#button2').click(function(){
+			// $('ul>li:eq(2)') == $('ul>li').eq(2)
+			//插入的节点紧邻操作节点
+			// $('ul>li:eq(2)').after('<li>5555</li>');
+			// $('ul>li:eq(2)').before('<li>5555</li>');
+
+			//相当于以下结果
+			$('<li>5555</li>').insertAfter('ul>li:eq(2)');
+			$('<li>5555</li>').insertBefore('ul>li:eq(2)');
+		});
+
+
+		$('#button3').click(function(){
+			$('p').clone(true).appendTo($(document.body));
+		});
+
+		$('#button4').click(function(){
+			//返回值是被替换掉的元素
+			// var ret = $('ul>li:eq(2)').replaceWith('<li>3333</li>');
+			// console.log(ret);
+
+			//每一个标签都会被替换为指定的内容
+			$('<span>span标签</span>').replaceAll('ul>li');
+		});
+
+		$('#button5').click(function(){
+			//每一个li标签 都被b标签所包裹   <b><li>...</li></b>
+			$('ul>li').wrap('<b></b>');
+		});
+		$('#button6').click(function(){
+			//每一个li的内容 被b标签所包裹   <li><b>...</b></li>
+			$('ul>li').wrapInner('<b></b>');
+		});
+		$('#button7').click(function(){
+			//使用一个标签包裹所有的li   <b><li>...</li><li>...</li><li>...</li></b>
+			$('ul>li').wrapAll('<b></b>');
+		});
+		$('#button8').click(function(){
+
+			$('ul li').unwrap();
+		});
+
+		$('#button9').click(function(){
+			$('ul>li:eq(2)').remove();
+		});
+
+		$('#button10').click(function(){
+			//遍历
+			// index是li在列表中的次序
+			$('ul>li').each(function(index){
+				console.log(this);
+				// $(this).index();
+			});
+		});
+		//jQuery提供了对节点进行处理的操作 包括添加一个节点，删除一个节点，替换一个节点，包裹一个节点
+
+		//1：插入节点的操作
+		// 1.1 插入的节点作为自己的孩子 最后一个孩子
+		// append(html/dom节点/jQuery对象)
+		// appendTo(节点)  把自己追加到某个节点的最后面
+		// A.append(B)    把B追加到A的最后面去
+		// B.appendTo(A)  B把自己追加到A的最后面
+
+		//把节点插入到自己的最前面，作为自己的第一个孩子
+		// prepend       A.prepend(B)
+		// prependTo		B.prependTo(A)
+
+		// 1.2 插入的节点作为自己的兄弟
+		// after   A.after(B) == B.insertAfter(A)    把B作为A的下一个兄弟
+		// before  A.before(B) == B.insertBefore(A)    把B作为A的前一个兄弟
+
+		// 1.3 clone复制一个节点
+		//DOM里 DOM.cloneNode(true/false)  true:深copy 不仅copy自身 还copy孩子节点 false:浅copy 只copy自身
+		// jQuery clone copy节点 true false
+		// true 连节点上的事件处理函数一起copy
+		// false 只copy节点和他的孩子 不copy事件处理
+
+		//replace替换节点
+		//一个节点一旦被替换 所有的事件全部丢掉
+		// A.replaceWith(content)  使用content节点来替换A节点
+		// content.replaceAll(selector)  把所有符合selector的所有元素替换为content
+
+		//wrap 包裹
+		//A.wrap(B)  使用B标签包裹每一个A标签
+		// A.wrapInner(B)  使用B标签包裹A的内容
+		// A.wrapAll(B)  使用一个B标签包裹所有的A标签
+		// A.unwrap()    去除A的父元素
+
+		// remove
+		// DOM 父节点.removeChild(节点)
+		// jQuery中 节点.remove(); 删除节点
+		// jQuery中 节点.detach()  
+		// jQuery中  节点.empty()   清空节点 不删除
+		// 返回值都是被删除的节点 remove返回的节点 绑定的事件全部丢失 detach返回被删除的节点 在该节点上绑定的事件仍然存在 
+	</script>
+</body>
+</html>

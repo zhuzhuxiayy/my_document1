@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../../lib/jquery-3.1.1.min.js'></script>
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		.info{width: 200px;border: 1px solid black;position: absolute;top: 0;left: 0;}
+		.info>h2{background-color: green;}
+		.info img{display: block;}
+	</style>
+</head>
+<body>
+	<img src="img/cm-x.jpg" title="草莓" data-bigimg='img/cm.jpg' alt="">
+	<img src="img/li-x.jpg" title="梨" data-bigimg='img/li.jpg' alt="">
+	<img src="img/yt-x.jpg" title="樱桃" data-bigimg='img/yt.jpg' alt="">
+
+	<!-- <div class="info"><img src="img/cm.jpg" alt=""><h2>草莓</h2></div> -->
+
+	<script>
+		$(function(){
+			var $divEle = '';
+			var copyTitle = '';
+			$('img').mouseenter(function(ev){
+				var title = $(this).attr('title');
+				var bigImageSrc = $(this).data('bigimg');
+
+				//创建div节点
+				// var html = '<div class="info>'+'<img src="'+bigImageSrc+' "alt="" />' + '<h2>'+title+'</h2></div>';
+				var html = '<div class="info">'+'<img src="'+bigImageSrc+'" alt="">' + '<h2>'+title+'</h2>'+'</div>';
+				$divEle = $(html);
+				$(document.body).append($divEle);
+
+				// 修改位置 left top 鼠标相对于文档的偏移
+				// ev.pageX ev.pageY
+				$divEle.css({'left':ev.pageX+10+'px','top':ev.pageY+10+'px'});
+
+				copyTitle = title;
+				// title内容设置为空
+				$(this).attr('title','');
+
+			}).mousemove(function(ev){
+				$divEle.css({'left':ev.pageX+10+'px','top':ev.pageY+10+'px'});
+			}).mouseout(function(ev){
+				$divEle.remove();
+				$(this).attr('title',copyTitle);
+			});
+		});
+	</script>
+</body>
+</html>

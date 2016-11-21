@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../../../lib/jquery-3.1.1.min.js'></script>
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		li{list-style: none;}
+		.box{width: 760px;height: 300px;margin: 50px auto;position: relative;overflow: hidden;}
+		.image{width: 100%;height: 100%;position: absolute;top:0px;left: 0px;}
+		.image>li{width: 100%;height: 100%;position: absolute;top:0px;left: 0px;display: none;}
+		.image>li:nth-child(1){background: url(images/bg1.jpg) no-repeat;display: block;}
+		.image>li:nth-child(2){background: url(images/bg2.jpg) no-repeat;}
+		.image>li:nth-child(3){background: url(images/bg3.jpg) no-repeat;}
+		.image>li:nth-child(4){background: url(images/bg4.jpg) no-repeat;}
+		.image>li:nth-child(5){background: url(images/bg5.jpg) no-repeat;}
+		
+		.image>li>img:nth-child(1){position: absolute;left: -760px;top: 0px;}
+		.image>li>img:nth-child(2){position: absolute;left: 0px;top: -300px;}
+
+		.indicator{position: absolute;left: 10px;top: 30px;width: 40px;height: 100%;}
+		.indicator>li{width: 30px;height: 30px;border: 1px solid black;margin-bottom: 5px;;text-align: center;line-height: 30px;}
+		.indicator .active{background-color: red;}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<ul class="image">
+			<li>
+				<img src="images/con1.png" alt="">
+				<img src="images/text1.png" alt="">
+			</li>
+			<li>
+				<img src="images/con2.png" alt="">
+				<img src="images/text2.png" alt="">
+			</li>
+			<li>
+				<img src="images/con3.png" alt="">
+				<img src="images/text3.png" alt="">
+			</li>
+			<li>
+				<img src="images/con4.png" alt="">
+				<img src="images/text4.png" alt="">
+			</li>
+			<li>
+				<img src="images/con5.png" alt="">
+				<img src="images/text5.png" alt="">
+			</li>
+		</ul>
+		<ul class="indicator">
+			<li>1</li>
+			<li>2</li>
+			<li>3</li>
+			<li>4</li>
+			<li>5</li>
+		</ul>
+	</div>
+
+	<script>
+		$(function(){
+			var index = 0;
+			var timer = setInterval(function(){
+				$('.image>li').eq(index).fadeIn().siblings().fadeOut();
+				$('.image>li').eq(index).children().first().animate({'left':'0px'},'normal',function(){
+					$(this).next().animate({'top':'0px'},'normal',function(){
+						// 复位
+						$('.image>li').eq(index).siblings().each(function(){
+							$(this).children().first().css({'left':'-760px'});
+							$(this).children().last().css({'top':'-300px'});
+						});
+						// 指示器
+						$('.indicator>li').eq(index).addClass('active').siblings().removeClass('active');
+						// 自加
+						index++;
+						if (index == 5) {
+							index = 0;
+						}
+					});
+				});
+			},1000);
+		})
+	</script>
+</body>
+</html>

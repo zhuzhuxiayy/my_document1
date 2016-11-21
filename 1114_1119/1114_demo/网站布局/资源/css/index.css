@@ -1,0 +1,85 @@
+*{margin: 0;padding: 0;font-size: 12px;font-family: '黑体';color: black;}
+.clear:after{content:'';display: block;overflow: hidden;clear: both;height: 0;}
+.clear{*zoom: 1;}
+li{list-style: none;}
+a{text-decoration: none;}
+img{display: block;}
+h1,h2,h3,h4,h5{font-weight: normal;}
+button{border-style: none;}
+.t-over{text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+
+.container{width: 1000px;margin: 0 auto;}
+/*------------------------top-------------------------*/
+.top{height: 105px;background: url(../images/headerbg.png) repeat-x;}
+
+.header{height: 70px;}
+.header>a{float: left;margin:5px 50px 0px 10px;}
+.header>input{width: 200px;height: 20px;margin-top: 25px;}
+.header>ul{float: right;margin:10px 30px 0px 0px;}
+.header>ul>li{float: left;width: 15px;height: 15px;}
+.header>ul>li:nth-child(1){background: url(../images/theme.gif) left top no-repeat;}
+.header>ul>li:nth-child(2){background: url(../images/theme.gif) -20px top no-repeat;}
+.header>ul>li:nth-child(3){background: url(../images/theme.gif) -40px top no-repeat;}
+.header>ul>li:nth-child(4){background: url(../images/theme.gif) -60px top no-repeat;}
+.header>ul>li:nth-child(5){background: url(../images/theme.gif) -80px top no-repeat;}
+.header>ul>li:nth-child(6){background: url(../images/theme.gif) -100px top no-repeat;}
+
+.nav{height: 35px;background-color: gray;}
+.nav>li{float: left;margin-left: 40px;line-height: 35px;position: relative;}
+.nav>li>a{color: white;font-size: 14px;font-weight: bold;}
+.nav-index{width: 500px;height: 200px;border:1px solid #aaa;position: absolute;top: 35px;left: 0;
+	background-color:white;display: none;z-index: 3;}
+.nav-index .show{width:100%;}
+.nav-index .show>h3{float: left;width: 100px;margin-top:15px;text-align: center;font-size: 14px;font-weight: bold;}
+.nav-index .show>ul{float: right;width: 400px;}
+.nav-index .show>ul>li{float: left;margin:5px 0px 5px 10px;}
+.nav-index .show>ul>li:after{content: '|';margin-left: 10px;}
+.nav-index .show>ul>li:last-child:after{content: '';}
+.nav-index .line{width: 480px;height:2px;margin:0px 10px;border-top: 1px dashed #999;}
+
+.nav>li:hover .nav-index{display: block;}
+
+/*------------------------main-------------------------*/
+.main{margin-top: 10px;}
+
+.mainleft{width: 20%;border:1px solid #666;box-sizing: border-box;float: left;}
+.mainleft>h2{height: 25px;background-color: lightgray;padding-left: 10px;line-height: 25px;color: white;
+	font-weight: bold;font-size: 14px;}
+.mainleft-f1{padding: 8px;}
+.mainleft-f1 .lefttitle{height: 20px;border-bottom:1px solid #eee;font-weight: bold;}
+.mainleft-f1 .leftlist>li{float: left;width: 90px;line-height: 25px;}
+.mainleft-f1 .leftlist>li>a{position: relative;}
+.mainleft-f1 .leftlist>li>a>img{position: absolute;top: -15px;right: -20px;}
+
+.mainright{width: 79%;float: right;margin-left: 5px;}
+.banner{width: 550px;float: left;position: relative;overflow: hidden;}
+.banner-images{width: 2750px;height: 321px;}
+.banner-images>img{float: left;}
+.banner-indicator{position: absolute;left: 0px;bottom: 0px;width: 550px;height: 50px;z-index: 2;}
+.banner-indicator>ul>li{width: 108px;float: left;background: darkred;height:50px;margin-right: 2.5px;
+	text-align: center;padding-top: 10px;box-sizing: border-box;color: white;}
+.banner-indicator>ul>li:last-child{margin-right: 0px;}
+.banner-active{background:skyblue url(../images/adindex.gif) bottom center no-repeat;}
+
+.bannerright{float: right;width: 230px;}
+.bannerright .list{border: 1px solid #ccc;margin-top: 10px;height: 135px;box-sizing: border-box;}
+.bannerright .list>h3{border-bottom: 1px solid #ccc;height: 20px;line-height: 20px;padding-left: 10px;font-weight: bold;}
+.bannerright .list>ul{margin: 5px 10px 0px 10px;}
+.bannerright .list>ul>li{line-height: 20px;}
+
+.f2{height: 225px;margin-top: 29px;}
+.f2 .title{height: 30px;border-bottom: 1px solid #ccc;}
+.f2 .title>p{float: left;line-height: 30px;font-weight: bold;}
+.f2 .title>ul{float: right;}
+.f2 .title>ul>li{float: left;margin:10px 10px 0px 0px;height: 20px;background: lightgray;width: 50px;
+	line-height: 20px;text-align: center;font-style: 14px;font-weight: bold;}
+.f2-acive{background: pink url(../images/chos.gif) center bottom no-repeat;}
+
+.f2 .content{height: 195px;}
+.shoes{float: left;width: 183px;margin: 5px 0px 0px 10px;}
+.shoesinfo{background: lightgray;height: 25px;line-height: 25px;text-align: center;}
+
+/*------------------------footer-------------------------*/
+.footer{height: 100px;}
+.footer>p{line-height: 100px;text-align: center;}
+

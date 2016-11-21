@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../lib/jquery-3.1.1.min.js'></script>
+</head>
+<body>
+	<div id="myDiv"></div>
+	<script>
+		$(function(){
+			// 数组或对象的遍历 
+			// forEach遍历数组时 参数1 是元素 参数2 是下标
+			// array.forEach(function(item,index){})
+
+			// 如果遍历的是一个数组
+			// 参数1 是下标
+			// 参数2 是元素
+			var array = [1,2,3,4,5];
+			$.each(array,function(index,item){
+				console.log(index);
+				console.log(item);
+			});
+
+			// 遍历对象
+			var obj = {name:"1602",age:20,tel:"12345678",eat:function(){
+				console.log('eat');
+			}};
+			//js for in
+			for( var key in obj){
+				console.log(key);
+				console.log(obj[key]);
+			}
+			//jQuery
+			$.each(obj,function(key,value){
+				console.log(key);
+				console.log(value);
+			});
+
+			// 过滤数组函数 
+			// array.filter
+			var newArray = $.grep(array,function(item,index){
+				// 谓词 一个返回true or false的表达式
+				return item > 3;
+			});
+			console.log(newArray);
+
+			// 把字符串中前后的空白字符删除
+			// $.trim() == String.trim
+
+			// 判断一个节点 是否包含另外一个节点(DOM对象 非jQuery对象)
+			// 第一个参数指向的节点 是否包含第二个参数指向的节点
+			// $.contains(前，后)
+			console.log( $.contains(document,$('#myDiv')[0]) );
+
+			// 合并多个对象到一个对象中
+			var a = {name:'1602',tel:"456"};
+			var b = {age:20,tel:"123"};
+			// 把b对象的内容合并到a对象中 返回值是合并后的对象
+			// 在合并的过程中 如果有相同的字段 后面的直接覆盖前面的
+			var c = $.extend(a,b); 
+			console.log(c);
+
+			// true：如果aa and bb有相同的字段，而且字段的值是一个对象，那么合并相同的字段
+			var aa = {name:'1602',tel:{number:"456"}};
+			var bb = {age:20,tel:{haoma:"123"}};
+			var cc = $.extend(true,aa,bb);
+			console.log(cc);
+
+			// $.extend()只有一个参数，把该参数的内容直接合并给jquery本身
+			// 我们通过这种方式扩展jQuery
+			$.extend({myMax:function(a,b){return a>b?a:b;}});
+			$.extend({myMin:function(a,b){return a<b?a:b;}});
+			console.log( $.myMin(1,2) );
+			console.log( $.myMax(1,2) );	
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+.main-right{width: 79%;float: right;margin-left: 5px;}
+.main-right .left{float: left;width: 40%;}
+.main-right .leftimg{width: 310px;height: 310px;border: 1px solid #666;}
+.main-right .left>button{width: 120px;height: 25px;border-radius: 6px;background-color: #fff;
+	border: 1px solid #666;margin:5px 0px 5px 85px;}
+.main-right .imglist>img{float: left;margin-right: 10px;}
+.main-right .text{margin-top: 10px;}
+.main-right .text>button{width: 80px;height: 25px;border: 1px solid #666;background-color: #ccc;
+	border-bottom: none;}
+.main-right .text-content{border: 1px solid #666;}
+
+.main-right .right{float: right;width: 59%;}
+.main-right .right>p{line-height: 23px;margin-top: 5px;}
+.main-right .right>h4{font-weight: bold;font-size: 14px;}
+.main-right .color>img{float: left;margin-right: 5px;}
+.main-right .size>li{float: left;margin-right: 5px;width: 25px;height: 25px;border: 1px solid #aaa;
+	text-align: center;line-height: 25px;}
+.main-right .star{width: 80px;height: 16px;background: url(../images/star-matrix.gif) center center no-repeat;}
+.main-right .basket{width: 100px;height: 25px;border-radius: 5px;background-color: #f00;margin-top: 10px;}
+.main-right .count{width: 50px;border-radius: 4px;border: 1px solid #ccc;}
+.main-right 

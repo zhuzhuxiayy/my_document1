@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../lib/jquery-3.1.1.min.js'></script>
+</head>
+<body>
+   <ul>
+   	<li></li>
+   	<li></li>
+   	<li></li>
+   	<li></li>
+   	<li></li>
+   </ul>
+
+	<input id="inputId" checked="" type="checkbox" name="" value="">是否阅读协议
+	<script>
+		$(function(){
+			//使用选择器获取jQuery的对象 类似于数组
+			var $input = $('#inputId');
+			//jQuery的对象转换为DOM对象 
+			var inputEle = $input[0];
+
+			//或者用get方式获取第几个值 例如在ul>li上面
+
+			// $('ul>li').get(4);
+
+			//使用DOM对象的属性checked 来判断是否处于选中了的状态
+/*			if (inputEle.checked) {
+				alert('感谢你阅读协议 请继续');
+			}*/
+
+			//使用jQuery判断 ，使用jQuery对象的方法
+			if($input.is(':checked')){
+				alert('感谢你阅读协议 请继续');
+			}
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../lib/jquery-3.1.1.min.js'></script>
+</head>
+<body>
+	<ul class="B">
+		<li>1 <span class="A">span1</span></li>
+		<li class="A">2</li>
+		<li class="B">3 <span class="A">span1</span></li>
+		<li class="A">4</li>
+		<li>5</li>
+	</ul>
+
+	<script>
+		// 查找列表中的第几项  从0开始
+		// $('ul>li').eq(index) == $('ul>li:eq(index)')
+		$(function(){
+			var $li3 = $('ul>li').eq(2);
+			console.log($li3[0]);
+			// $('ul>li').first() == $('ul>li:first')
+			var $li0 = $('ul>li').first();
+			console.log($li0[0]);
+
+			// $('ul>li').last() == $('ul>li:last')
+			var $last = $('ul>li').last();
+			console.log($last[0]);
+
+			// 查找兄弟
+			// next  找和自己临近的下一个兄弟
+			// nextAll  找后面的所有兄弟
+			// prev     找前面的一个兄弟
+			// prevAll   找前面所有的兄弟
+			// siblings  找自己的所有的兄弟节点
+			console.log('----------兄弟------------');
+			console.log( $li3.next()[0] );
+			console.log( $li3.prev()[0] );
+
+			$li3.nextAll().each(function(){
+				console.log($(this)[0]);
+			});
+			$li3.prevAll().each(function(){
+				console.log($(this)[0]);
+			});
+			$li3.siblings().each(function(){
+				console.log($(this)[0]);
+			});
+
+			// filter:从列表中过滤出符合要求（选择器）的节点列表
+			console.log('------------filter------------');
+			$('ul>li').filter('.A').each(function(){
+				console.log($(this)[0]);
+			});
+
+			// 孩子相关
+			// children  只找孩子一层，不去查找更深的层次
+			// find  查找自己的子孙，把所有符合要求的全部查出来
+			console.log('-------------孩子相关-------------');
+			$('ul').children('.A').each(function(){
+				console.log($(this)[0]);
+			});
+
+			// children 没有参数时，列出自己所有的孩子
+			$('ul').children().each(function(){
+				console.log($(this)[0]);
+			});
+
+			$('ul').find('.A').each(function(){
+				console.log($(this)[0]);
+			});
+
+			// 祖先相关选择器
+			// parent  查找自己直接的父节点 祖先不要
+			// parents   查找祖先节点 
+			// closest  从自身开始查找，如果自身符合选择器，返回自身，如果自身不满足，查找自己的第一个满足选择器的祖先，然后返回
+			console.log('----------parent------------');
+			$('span').parent('ul').each(function(){
+				console.log($(this)[0]);
+			});
+
+			console.log('----------parents------------');
+			$('span').first().parents('ul').each(function(){
+				console.log($(this)[0]);
+			})
+
+			console.log('----------closest------------');
+			var result = $('span').last().closest('.A');
+			console.log(result[0]);
+
+			var result2 = $('span').last().closest('.B');
+			console.log(result2[0]);
+
+		});
+	</script>
+</body>
+</html>

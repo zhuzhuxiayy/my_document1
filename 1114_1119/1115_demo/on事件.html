@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../lib/jquery-3.1.1.min.js'></script>
+</head>
+<body>
+	<ul>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	<button type="button">生成li</button>
+	<script>
+		$(function(){
+			//on绑定事件，用于替代bind操作
+			// on 用于绑定一个事件到节点上
+			// 参数1 事件类型
+			// 参数2 孩子节点选择器  当在节点的满足选择器的孩子上 同样可以触发该事件
+			// 解决动态插入的节点 无法响应以前绑定的事件
+			// 使用的原理是冒泡原理
+			// 参数3 事件发生时传递的数据 可选
+			// 参数4 响应函数 
+			// jQuery节点.on('click',孩子,传递数据,function)
+
+			// 解除on安插的事件
+			// off()('click')
+			// off()('click',fn)
+
+			$('ul').on('click','li',function(){
+				console.log('li被点击');
+				console.log(this);
+				alert('li被点击啦');
+			});
+
+			$('button').click(function(){
+				$('ul').append('<li>5</li>');
+			});
+		})
+	</script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../../lib/jquery-3.1.1.min.js'></script>
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		.clear:after{content: '';display: block;overflow: hidden;clear: both;height: 0;}
+		body{background: url(images/bg.jpg);overflow: hidden;}
+		.box{width: 750px;margin: 50px auto;}
+		.box>span{float: left;width: 230px;height: 172px;box-shadow: 0px 0px 20px #fff;margin: 5px 5px 5px 0px;background-color: white;padding: 5px;}
+		.box>span>img{width: 230px;height: 172px;}
+
+		.showimage{position: absolute;top:0;left: 0;width: 100%;height: 100%;display: none;}
+		.mask{position: absolute;top:0;left: 0;width: 100%;height: 100%;background-color: rgba(0,0,0,0.7);}
+		/*top left 的百分比 等于父视图的宽高乘以百分比*/
+		.imagelist{position: absolute;width: 650px;height: 450px;top: 50%;left: 50%;margin-left: -325px;margin-top: -225px;}
+		.imagelist>img{position: absolute;top: 0;left: 0;width: 100%;height: 100%;}
+		.prev,.next{width: 50px;height: 80px;background-color: black;border-radius: 10px;color: white;font-size: 30px;box-shadow: 0px 0px 20px #fff;text-align: center;line-height: 80px;}
+		.prev{position: absolute;top: 50%;margin-top: -40px;left: 100px;}
+		.next{position: absolute;top: 50%;margin-top: -40px;right: 100px;}
+	</style>
+</head>
+<body>
+	<div class="box clear">
+		<span><img src="images/main/1.jpg" alt=""></span>
+		<span><img src="images/main/2.jpg" alt=""></span>
+		<span><img src="images/main/3.jpg" alt=""></span>
+		<span><img src="images/main/4.jpg" alt=""></span>
+		<span><img src="images/main/5.jpg" alt=""></span>
+		<span><img src="images/main/6.jpg" alt=""></span>
+		<span><img src="images/main/7.jpg" alt=""></span>
+		<span><img src="images/main/8.jpg" alt=""></span>
+		<span><img src="images/main/9.jpg" alt=""></span>
+	</div>
+
+	<!-- 显示图片的列表 -->
+	<div class="showimage">
+		<!-- 显示一个半透明的遮罩 -->
+		<div class="mask">
+			<div class="imagelist">
+				<!-- 图片列表 -->
+				<img src="images/show/0/1.jpg" alt="">
+				<img src="images/show/0/2.jpg" alt="">
+				<img src="images/show/0/3.jpg" alt="">
+				<img src="images/show/0/4.jpg" alt="">
+				<img src="images/show/0/5.jpg" alt="">
+			</div>
+			<!-- 向前向后的按钮 -->
+			<div class="prev">&lt;</div>
+			<div class="next">&gt;</div>
+		</div>
+	</div>
+
+	<script>
+		$(function(){
+			//点击span的响应
+			$('.box>span').click(function(){
+				// 获取点击图片次序
+				var index = $(this).index();
+
+				// 遍历img列表 给每一个img设置相应的图片
+				var imglist = $('.imagelist>img');
+				console.log('-------------imglist得到的是DOM对象----------------');
+				console.log(imglist);
+				for (var i = 0; i < imglist.length; i++) {
+					// attr要使用jQuery对象 imglist[i]转为jQuery对象
+					$(imglist[i]).attr('src','images/show/'+index+'/'+(i+1)+'.jpg');
+				}
+				$('.showimage').show();
+			});
+
+			// 点击showimage半透明遮罩 的响应
+			$('.showimage').click(function(){
+				$(this).hide();
+			});
+
+			// 左边按钮
+			$('.prev').click(function(ev){
+				// 阻止事件的冒泡
+				ev.stopPropagation();
+				// 把最里面的图片向左做动画 动画结束后把图片放到最后面
+				// 判断动画是否处于执行中 如果正在进行中 那么不做操作 如果没有动画才执行(避免了重复点击的乱序问题)
+				if ($('.imagelist').is(':animated') == false) {
+					// 找到imagelist
+					$('.imagelist>img').first().animate({'left':'-100%'},1000,function(){
+						// append 把一个元素作为自己的最后一个孩子
+						$('.imagelist').append($(this));
+						$(this).animate({'left':'0px'},1000);
+					});
+					$('.imagelist').animate({'left':'60%'},1000,function(){
+						$(this).animate({'left':'50%'},1000);
+					});	
+				}
+
+			});
+
+			// 右边按钮
+			$('.next').click(function(ev){
+				// 阻止事件的冒泡
+				ev.stopPropagation();
+
+				// 判断动画是否处于执行中 如果正在进行中 那么不做操作
+				if ( $('.imagelist').is(':animated') == false ) {
+					// 找到imagelist
+					$('.imagelist>img').last().animate({'left':'100%'},1000,function(){
+						// prepend把一个元素作为自己的第一个孩子
+						$('.imagelist').prepend($(this));
+						$(this).animate({'left':'0px'},1000);
+					});
+					$('.imagelist').animate({'left':'40%'},1000,function(){
+						$(this).animate({'left':'50%'},1000);
+					});					
+				}
+			});
+		})
+	</script>
+</body>
+</html>

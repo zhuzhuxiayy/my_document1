@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style type="text/css" media="screen">
+		*{margin: 0;padding: 0;}
+		.box{width: 500px;margin:10px auto;}
+		.buttons>button{width: 60px;height: 30px;background-color: green;border-radius: 5px;}
+		.content>div{width: 200px;height: 100px;border:1px solid black;text-align: center;line-height: 100px;display: none;}
+	</style>
+	<!-- 1:如何使用？下载 www.jquery.com
+	1 本地引用jquery文件
+	2 CDN方式 下载后使用 -->
+	<script src='../lib/jquery-3.1.1.min.js'></script>
+</head>
+<body>
+	<!-- jQuery:write less do more,他是对原生javascript的一种封装
+	1：对选择器的封装，跟css1~css3选择器大部分一致，jQuery增加了其他的一些选择器
+	2：提供了自己的一套对DOM的操作
+	3：提供了一些动画的操作
+	4：封装了Ajax的请求，使用函数可以很方便地和服务器进行通讯
+	5：jQuery的插件（别人写好的代码我们可以直接使用） -->
+	<!-- jQuery屏蔽了浏览器之间的差异 -->
+
+	<div class="box">
+		<div class="buttons">	
+			<button type="button">按钮1</button>
+			<button type="button">按钮2</button>
+			<button type="button">按钮3</button>
+		</div>
+		<div class="content">
+			<div style="display: block;">
+				这是按钮1的内容
+			</div>
+			<div>
+				这是按钮2的内容
+			</div>
+			<div>
+				这是按钮3的内容
+			</div>
+		</div>
+	</div>
+
+	<script>
+		//$是jquery中的一个对象
+		$(function(){
+			//当文档准备好的时候，调用匿名函数，window.onload
+
+			//$('button') 获取所有的button列表
+			$('button').click(function(){
+				//获取button的次序 $(this)是把dom对象转成jquery对象
+				var index = $(this).index();
+				//链式写法 等于这个次序的show 其他的hide
+				$('.content>div').eq(index).show().siblings().hide();
+			});
+		});
+	</script>
+</body>
+</html>

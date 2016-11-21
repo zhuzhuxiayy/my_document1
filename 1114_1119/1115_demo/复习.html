@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="../lib/jquery-3.1.1.min.js"></script>
+	<style type="text/css" media="screen">
+		div>span{display: none;}
+	</style>
+</head>
+<body>
+	<img src="blue_three_small.jpg" title="这是一张h5图片" alt="h5图片">
+	<div><span></span></div>
+
+	<script>
+		$(function(){
+			$('img').mouseover(function(){
+				var $src = $(this).attr('src');
+				var $title = $(this).attr('title');
+				var $alt = $(this).attr('alt');
+
+				var content = '图片属性' + $src + $title + $alt;
+
+				$('div>span').show().html(content);
+				// $('div>span').show().text(content);
+			})
+			.mouseout(function(){
+				$('div>span').empty().hide();
+				//或者可以这样写
+				// $('div>span').html('').hide();
+				$(this).attr('title','图片');
+			});
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src='../lib/jquery-3.1.1.min.js'></script>
+</head>
+<body>
+	<div style="width: 100px;height: 100px;background-color: red;">
+		
+	</div>
+	<button id="button1" type="button">显示隐藏动画</button>
+	<button id="button2" type="button">渐隐动画</button>
+	<button id="button3" type="button">slide动画</button>
+	<button id="button4" type="button">animate动画</button>
+	<button id="button5" type="button">stop动画</button>
+
+	<script>
+		// jQuery支持的动画
+		// 显示隐藏动画  show()  hide()  toggle()
+		// 渐隐动画  fadeIn() fadeOut() fadeTo() fadeToggle()
+		// slide动画 slideDown() slideUp() slideToggle()
+		// 自定义的动画 animate
+
+		// delay(毫秒数) 动画延迟多久才开始
+		// stop(clearQueen,gotoEnd)
+		// clearQueen:是否把还没有执行的动画队列中的动画清除，true false 默认false不清除
+		// gotoEnd 是否把动画直接变为最终的状态 true变为最终状态 false不变为最终状态，就在当前位置是默认值
+		
+		$(function(){
+			// 显示隐藏动画：通过把元素的宽width 高height 以及opacity设置为0
+			$('#button1').click(function(){
+				// 显示 无参数，没有动画效果
+				// show(speed,callback)
+				// speed 单位毫秒 1000 == 1s
+				                  // fast == 0.2s
+				                  // normal == 0.4s
+				                  // slow == 0.6s
+				// callback  动画结束时调用的毁掉函数
+				// $('div').hide('slow',function(){
+				// 	$(this).show('fast');
+				// });
+
+				// toggle(speed,callback)  根据当前的状态(显示还是隐藏)。以动画的方式来反向执行，如果是隐藏就显示，如果显示就隐藏
+				$('div').toggle(2000,function(){
+					$(this).toggle('slow');
+				});
+			});
+
+			//渐隐动画 通过修改元素的opacity属性值0~1，来作为动画
+			$('#button2').click(function(){
+				// fadeIn() fadeOut() 参数和show一样，speed 和 callback
+				// $('div').fadeOut(1000,function(){
+				// 	$(this).fadeIn(1000);
+				// });
+
+				//fadeToggle 如果当前是透明 就不透明 如果当前是不透明 就透明
+				$('div').fadeToggle(1000,function(){
+					$(this).fadeToggle(1000);
+				});
+
+			});
+
+			//fadeTo(speed,opacity,callback)
+			$('div').hover(function(){
+				$(this).fadeTo(2000,0.5);
+			},function(){
+				$(this).fadeTo(2000,1.0);
+			});
+
+			// slideUp slideDown slideToggle
+			$('#button3').click(function(){
+				//slideDown slideUp slideToggle
+				$('div').slideUp(1000,function(){
+					$(this).slideDown(1000);
+				});
+				$('div').slideToggle(1000,function(){
+					$(this).slideToggle(1000);
+				});
+			});
+
+			// animate
+			$('#button4').click(function(){
+				// animate({修改属性的最终值},speed,callback)
+				// 动画一定是从一种状态过渡到另外一种状态
+				// $('div').animate({'width':'200px','height':'200px'},1000,function(){
+				// 	alert('动画结束');
+				// });
+
+				//一个动画结束后 另外一个动画才执行
+				// $('div').animate({'width':'200px'});
+				// $('div').animate({'height':'200px'});
+				// 或者 链式写法
+				// $('div').animate({'width':'200px'}).animate({'height':'200px'});
+
+				// 动画队列：把在一个元素上的动画，根据书写的次序形成一个队列。然后把动画在该队列上从头到尾依次执行
+
+				$('div').delay(5000).animate({'width':'200px'});
+			});
+
+			//stop
+			$('#button5').click(function(){});
+
+		});
+	</script>
+</body>
+</html>

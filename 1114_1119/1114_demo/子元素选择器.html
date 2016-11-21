@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<style type="text/css" media="screen">
+		/*div>li:nth-child(3n+1)*/
+	</style>
+	<script src='../lib/jquery-3.1.1.min.js' type="text/javascript"></script>
+</head>
+<body>
+	<ul>
+		<span>span</span>
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+		<li>5</li>
+		<p>
+			testedgfdsfd
+			<span>span2</span>
+		</p>
+	</ul>
+	<script>
+		//:nth-child(index)  选择第index个孩子 index从1开始
+		//:nth-child(even)  从1开始选择次序为偶数的孩子
+		//:nth-child(odd)   从1开始选择次序为奇数的孩子
+		//:nth-child(3n+1)  选择次序为3n+1的孩子 n=0 1  n=1 4  n=3  7
+
+		//:first  and :first-child
+		//:first 选择列表中的第一个
+		//:first-child 找第一个孩子
+
+		//:first-child  选择第一个孩子
+		//:last-child  选择最后一个孩子
+		//:only-child  选择只有一个孩子的元素 选择自己是父节点唯一的孩子
+
+		$(function(){
+			$('ul>li:first').css({'background-color':'red'});
+			$('ul:first').css({'background-color':'green'});
+			$('ul>:first-child').css({'background-color':'blue'});
+			$('ul>:nth-child(3)').css({'background-color':'yellow'});
+			$('ul>p>:only-child').css({'background-color':'pink'});
+			$('ul>:nth-child(2n+1)').css({'background-color':'gray'});
+		});
+	</script>
+</body>
+</html>

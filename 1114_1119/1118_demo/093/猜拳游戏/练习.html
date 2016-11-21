@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <link rel="stylesheet" href="">
+    <script src='../../../lib/jquery-3.1.1.min.js'></script>
+    <style type="text/css" media="screen">
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .clear:after {
+        content: '';
+        clear: both;
+        display: block;
+        overflow: hidden;
+        height: 0px;
+    }
+    
+    li {
+        list-style: none;
+    }
+    
+    .box {
+        width: 800px;
+        margin: 0px auto;
+    }
+    
+    .boxleft {
+        float: left;
+        width: 140px;
+        border: 10px solid pink;
+        box-sizing: border-box;
+    }
+    
+    .boxleft>li {
+        width: 120px;
+        height: 120px;
+        border-bottom: 10px solid pink;
+    }
+
+    .boxleft>li:hover{background-color: pink}
+    
+
+    
+    .boxright {
+        width: 600px;
+        float: right;
+        text-align: center;
+    }
+    
+    .boxright button {
+        width: 180px;
+        height: 50px;
+        border: 10px solid pink;
+        border-radius: 5px;
+    }
+    
+    .showimage {
+        width: 100%;
+        margin-bottom: 50px;
+    }
+    
+    .showimage .name {
+        width: 100%;
+        padding: 0px 80px;
+        box-sizing: border-box;
+    }
+    
+    .showimage .name>h3:first-child {
+        float: left;
+    }
+    
+    .showimage .name>h3:last-child {
+        float: right;
+    }
+    
+    .person {
+        float: left;
+        width: 223px;
+        height: 337px;
+        border: 10px solid pink;
+        background: url(img/readyl.png);
+        box-sizing: border-box;
+    }
+    
+    .computer {
+        float: right;
+        width: 223px;
+        height: 337px;
+        border: 10px solid pink;
+        background: url(img/readyr.png);
+        box-sizing: border-box;
+    }
+
+    .guess1 {
+        background: url(img/1.png) no-repeat center;
+    }
+    
+    .guess2 {
+        background: url(img/2.png) no-repeat center;
+    }
+    
+    .guess3 {
+        background: url(img/3.png) no-repeat center;
+    }
+    .boxleft>li:last-child{
+        border-bottom: none;
+
+    }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <ul class="boxleft">
+            <li class="guess1"></li>
+            <li class="guess2"></li>
+            <li class="guess3"></li>
+        </ul>
+        <div class="boxright">
+            <div class="showimage clear">
+                <div class="name clear">
+                    <h3>我：翠花</h3>
+                    <h3>电脑：王二</h3>
+                </div>
+                <div class="person">
+                </div>
+                <div class="computer">
+                </div>
+            </div>
+            <button type="button">开始</button>
+        </div>
+    </div>
+    <script>
+    $(function() {
+        function User() {
+            // this.name = name;
+            this.avatarEle = document.querySelector('.person');
+            this.point = -1;
+        }
+
+        User.prototype.guess = function(point) {
+            this.point = point;
+            this.avatarEle.className = "person guess" + (this.point + 1);
+        }
+
+        function Computer() {
+            // this.name = name;
+            this.avatarEle = document.querySelector('.computer');
+            this.point = -1;
+        }
+
+        Computer.prototype.guess = function() {
+            this.point = Math.floor(Math.random() * 3);
+            this.avatarEle.className = "computer guess" + (this.point + 1);
+        }
+
+        function Game(user, comp) {
+            this.user = user;
+            this.comp = comp;
+        }
+
+        Game.prototype.start = function() {
+            clearInterval(this.timer);
+            var that = this;
+            this.timer = setInterval(function() {
+                var random1 = Math.floor(Math.random() * 3) + 1;
+                var random2 = Math.floor(Math.random() * 3) + 1;
+
+                that.user.avatarEle.className = "person guess" + random1;
+                that.comp.avatarEle.className = "computer guess" + random2;
+                var gus1  = 'guess' + random1;
+                var gus2  = 'guess' + random1;
+                // 替换person和computer的背景图
+                document.getElementsByClassName('person')[0].style.background = document.getElementsByClassName(gus1)[0].style.background;
+                document.getElementsByClassName('computer')[0].style.background =  document.getElementsByClassName(gus2)[0].style.background;
+            }, 100);
+        }
+
+        Game.prototype.stop = function(guessPoint) {
+            clearInterval(this.timer);
+            this.user.guess(guessPoint);
+            this.comp.guess();
+            // 还原person和computer的背景图
+            document.getElementsByClassName('person')[0].style.background = 'url(img/readyl.png)';
+            document.getElementsByClassName('computer')[0].style.background = 'url(img/readyr.png';
+            alert('我' + this.user.point + '电脑' + this.comp.point);
+        }
+
+        $('button').click(function() {
+            game.start();
+        });
+
+        var listEle = document.querySelectorAll('.boxleft>li');
+        for (var i = 0; i < listEle.length; i++) {
+            listEle[i].index = i;
+            listEle[i].onclick = function() {
+                var clickIndex = this.index;
+                game.stop(clickIndex);
+            }
+        }
+        var user = new User();
+        var computer = new Computer();
+        var game = new Game(user, computer);
+    })
+    </script>
+</body>
+
+</html>
